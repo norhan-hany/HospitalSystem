@@ -1,0 +1,102 @@
+﻿@using HospitalSystem.Models;
+
+@model IEnumerable<HospitalSystem.Models.Doctor>
+<div class="container">
+    
+<form method="get" asp-controller="Doctor" asp-action="Index"
+      class="row g-3 mb-4">
+
+    <div class="col-md-5">
+        <label class="form-label">Doctor Name</label>
+        <input type="text"
+               name="searchName"
+               value="@ViewBag.SearchName"
+               class="form-control"
+               placeholder="Enter doctor name" />
+    </div>
+
+    <div class="col-md-5">
+        <label class="form-label">Specialty</label>
+        <select name="specialty" class="form-select">
+            <option value="">All Specialties</option>
+
+            @foreach (var item in ViewBag.Specialties)
+            {
+                <option value="@item"
+                        selected="@(ViewBag.SelectedSpecialty == item)">
+                    @item
+                </option>
+            }
+        </select>
+    </div>
+
+    <div class="col-md-2 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary w-100">
+            Search
+        </button>
+    </div>
+</form>
+            <h2>Doctors</h2>
+           <div class="row">
+                @foreach (var doctor in Model)
+                {
+                    <div class ="col-sm-6 col-md-4 col-lg-4 mb-5">
+                    <div class="card" style="width: 18rem;">
+                    <img src="~/images/@doctor.Image" class="card-img-top doctor-image" alt="@doctor.Name">
+                        <div class="card-body">
+                            <h5 class="card-title">@doctor.Name</h5>
+                            <p class="card-text">
+                              Specialization: @(doctor.Specialization?.Name ?? "Not Assigned")</p> 
+                           <a href="/Doctor/appointments/@doctor.Id" class="btn btn-primary">Make Appointment</a>
+                        </div>
+                    </div>
+                </div>
+                }
+    </div>
+
+@if (ViewBag.TotalPages > 1)
+{
+   <div class="d-flex justify-content-center mt-2"
+     style="position: relative; z-index: 2; margin-bottom: 100px;">
+        <nav aria-label="Pagination">
+            <ul class="pagination pagination-sm mb-0">
+
+                <li class="page-item @(ViewBag.CurrentPage <= 1 ? "disabled" : "")">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-page="@(ViewBag.CurrentPage - 1)"
+                       asp-route-searchName="@ViewBag.SearchName"
+                       asp-route-specialty="@ViewBag.SelectedSpecialty">
+                        Previous
+                    </a>
+                </li>
+
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
+                        <a class="page-link"
+                           asp-action="Index"
+                           asp-route-page="@i"
+                           asp-route-searchName="@ViewBag.SearchName"
+                           asp-route-specialty="@ViewBag.SelectedSpecialty">
+                            @i
+                        </a>
+                    </li>
+                }
+
+                <li class="page-item @(ViewBag.CurrentPage >= ViewBag.TotalPages ? "disabled" : "")">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-page="@(ViewBag.CurrentPage + 1)"
+                       asp-route-searchName="@ViewBag.SearchName"
+                       asp-route-specialty="@ViewBag.SelectedSpecialty">
+                        Next
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+}
+
+</div>

@@ -1,0 +1,28 @@
+﻿@model List<HospitalSystem.Models.Appointment>
+
+<h2>All Appointments</h2>
+
+<p>Number of appointments: @Model.Count</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Patient Name</th>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Time</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var appointment in Model)
+        {
+            <tr>
+                <td>@appointment.PatientName</td>
+                <td>@(appointment.Doctor?.Name ?? "No doctor")</td>
+                <td>@appointment.Date.ToString("yyyy-MM-dd")</td>
+                <td>@appointment.Time.ToString(@"hh\:mm")</td>
+            </tr>
+        }
+    </tbody>
+</table>

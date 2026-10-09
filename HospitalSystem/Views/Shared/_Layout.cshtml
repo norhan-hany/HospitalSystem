@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - HospitalSystem</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HospitalSystem.styles.css" asp-append-version="true" />
+
+    <style>
+
+            body {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                margin: 0;
+                font-family: Arial, sans-serif;
+                background-image: linear-gradient( rgba(244, 248, 252, 0.75), rgba(244, 248, 252, 0.75) ), url('/images/h.jpg');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }
+
+            /* Navbar */
+            .navbar {
+                background-color: #ffffff;
+                padding: 15px 0;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            }
+
+            .navbar-brand {
+                color: #0d6efd !important;
+                font-size: 25px;
+                font-weight: bold;
+            }
+
+            .navbar .nav-link {
+                color: #344054 !important;
+                font-weight: 500;
+                margin: 0 10px;
+                transition: 0.3s;
+            }
+
+                .navbar .nav-link:hover {
+                    color: #0d6efd !important;
+                }
+
+            .navbar-toggler {
+                border-color: #0d6efd;
+            }
+
+            /* Main Content */
+            main {
+                flex: 1;
+                padding-top: 30px;
+                padding-bottom: 30px;
+            }
+
+            /* Footer */
+            .footer {
+                background-color: #174a7e;
+                color: white;
+                padding: 25px 0;
+                margin-top: auto;
+                width: 100%;
+            }
+
+                .footer a {
+                    color: white;
+                    text-decoration: none;
+                }
+
+                    .footer a:hover {
+                        text-decoration: underline;
+                    }
+
+                .footer p {
+                    margin-bottom: 0;
+                }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+
+                <a class="navbar-brand"
+                   asp-controller="Home"
+                   asp-action="Index">
+                    ✚ HospitalSystem
+                </a>
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarMenu"
+                        aria-controls="navbarMenu"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMenu">
+
+                    <ul class="navbar-nav ms-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Home"
+                               asp-action="Index">
+                                Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="/Doctor/Index">
+                                Doctors
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="/Appointments/Index">
+                                All Appointments
+                            </a>
+                        </li>
+
+                       
+
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Content -->
+    <main role="main">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+
+            <div class="row align-items-center text-center text-md-start">
+
+                <div class="col-md-8 mb-2 mb-md-0">
+                    <p>
+                        &copy; @DateTime.Now.Year - HospitalSystem.
+                        All Rights Reserved.
+                    </p>
+                </div>
+
+                <div class="col-md-4 text-md-end">
+                    <a asp-controller="Home" asp-action="Privacy">
+                        Privacy Policy
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
+```
